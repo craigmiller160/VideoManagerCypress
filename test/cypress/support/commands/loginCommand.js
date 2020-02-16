@@ -1,10 +1,10 @@
-Cypress.Commands.add('login', async (userName, password) => {
+Cypress.Commands.add('login', (userName, password) => {
     const request = {
         userName,
         password
     };
 
-    await cy.request({
+    return cy.request({
         method: 'POST',
         url: '/api/auth/login',
         body: request

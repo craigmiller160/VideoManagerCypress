@@ -1,6 +1,9 @@
+const { users: { admin }, password } = require('../../util/users');
+
 describe('Navbar appearance and actions by user role', () => {
     it('user has admin role', () => {
-        throw new Error();
+        cy.login(admin.userName, password);
+        cy.visit('https://localhost:3000');
     });
 
     it('user has edit role', () => {
