@@ -14,4 +14,8 @@ describe('Navbar appearance and actions by user role', () => {
     it('user has no roles', () => {
         throw new Error();
     });
+
+    it('user can logout', () => {
+        throw new Error();
+    });
 });
