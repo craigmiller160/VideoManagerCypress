@@ -1,12 +1,16 @@
 import { HOST_URL } from '../util/envConstants';
 
+const isOnLoginPage = () => {
+    cy.get('#login-title').contains('Login');
+};
+
 describe('Login Page', () => {
     beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
     });
 
     it('shows required validation warning for both input fields', () => {
-        throw new Error();
+        isOnLoginPage();
     });
 
     it('shows email validation warning for username field', () => {
