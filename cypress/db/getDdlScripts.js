@@ -6,8 +6,8 @@ const getDdlScripts = async (env) => {
     const dropScript = fs.readFileSync(env[PG_DROP_SCRIPT_PATH], 'utf8');
 
     return {
-        createScript: '',
-        dropScript: ''
+        createScript,
+        dropScript
     }
 };
 

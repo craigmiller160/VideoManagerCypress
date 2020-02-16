@@ -20,11 +20,5 @@ import './commands'
 // require('./commands')
 
 before(() => {
-    console.log('Before init'); // TODO delete this
     cy.task('initDb', { env: Cypress.env() });
-    console.log('After init'); // TODO delete this
-});
-
-after(() => {
-    console.log('Global after'); // TODO delete this
 });

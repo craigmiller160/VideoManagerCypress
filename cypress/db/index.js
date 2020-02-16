@@ -5,7 +5,7 @@ const createSchema = require('./createSchema');
 class PG {
     constructor() { }
 
-    async init({ env }) {
+    async init(env) {
         const { createScript, dropScript } = await getDdlScripts(env);
         this.client = getClient(env);
         createSchema(this.client, createScript, dropScript);

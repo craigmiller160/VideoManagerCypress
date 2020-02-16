@@ -22,10 +22,8 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 
     on('task', {
-        async initDb() {
-            console.log('Starting init DB');
-            await PG.init();
-            console.log('Ending init DB');
+        initDb: ({ env }) => {
+            return PG.init(env);
         }
-    })
+    });
 };
