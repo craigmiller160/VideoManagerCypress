@@ -57,5 +57,6 @@ describe('Login Page', () => {
         cy.get('#login-btn').click();
 
         // TODO need to add custom attributes to the element to detect the dynamic classes being added
+        throw new Error();
     });
 });
