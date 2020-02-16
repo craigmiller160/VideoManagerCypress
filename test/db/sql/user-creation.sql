@@ -3,7 +3,7 @@ VALUES (1, 'admin@gmail.com', '$2a$10$ytpfmAxR8lh9KwnWtkiinOYWn2779iJE3rE6BWLzHz
     (2, 'edit@gmail.com', '$2a$10$ytpfmAxR8lh9KwnWtkiinOYWn2779iJE3rE6BWLzHzwEh9Q9hJGv2', 'Edit', 'User'),
     (3, 'scan@gmail.com', '$2a$10$ytpfmAxR8lh9KwnWtkiinOYWn2779iJE3rE6BWLzHzwEh9Q9hJGv2', 'Scan', 'User'),
     (4, 'standard@gmail.com', '$2a$10$ytpfmAxR8lh9KwnWtkiinOYWn2779iJE3rE6BWLzHzwEh9Q9hJGv2', 'Standard', 'User'),
-    (5, 'all@gmail.com', '', 'All Roles', 'User');
+    (5, 'all@gmail.com', '$2a$10$ytpfmAxR8lh9KwnWtkiinOYWn2779iJE3rE6BWLzHzwEh9Q9hJGv2', 'All Roles', 'User');
 
 INSERT INTO user_roles (user_id, role_id)
 VALUES (5, 1), -- All Roles User, Edit Role
