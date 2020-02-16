@@ -1,3 +1,5 @@
-export default (client, dropScript, createScript) => {
+const createSchema = (client, dropScript, createScript) => {
 
 };
+
+module.exports = createSchema;

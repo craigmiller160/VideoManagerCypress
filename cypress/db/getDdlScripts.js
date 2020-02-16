@@ -1,6 +1,6 @@
-import { PG_CREATE_SCRIPT_PATH, PG_DROP_SCRIPT_PATH } from '../util/envConstants';
+const { PG_CREATE_SCRIPT_PATH, PG_DROP_SCRIPT_PATH } = require('../util/envConstants');
 
-export default async () => {
+const getDdlScripts = async () => {
     const createScript = await cy.readFile(Cypress.env(PG_CREATE_SCRIPT_PATH));
     const dropScript = await cy.readFile(Cypress.env(PG_DROP_SCRIPT_PATH));
     return {
@@ -8,3 +8,5 @@ export default async () => {
         dropScript
     }
 };
+
+module.exports = getDdlScripts;

@@ -15,14 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import PG from '../db';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 before(async () => {
     console.log('Before init'); // TODO delete this
-    await PG.init();
+    await cy.task('initDb');
     console.log('After init'); // TODO delete this
 });
 

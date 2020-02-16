@@ -11,5 +11,8 @@
     "cypress": "^4.0.2",
     "pg": "^7.18.1",
     "pg-native": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.1"
   }
 }

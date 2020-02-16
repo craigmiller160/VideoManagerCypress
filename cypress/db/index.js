@@ -1,14 +1,13 @@
-import getDdlScripts from './getDdlScripts';
-import getClient from './getClient';
-import createSchema from './createSchema';
+const getDdlScripts = require('./getDdlScripts');
+const getClient = require('./getClient');
+const createSchema = require('./createSchema');
 
 class PG {
-    constructor() {
-        this.client = getClient();
-    }
+    constructor() { }
 
     async init() {
         const { createScript, dropScript } = await getDdlScripts();
+        this.client = getClient();
         createSchema(this.client, createScript, dropScript);
     }
 }
