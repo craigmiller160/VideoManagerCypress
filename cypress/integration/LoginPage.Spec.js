@@ -33,7 +33,13 @@ describe('Login Page', () => {
     });
 
     it('logs into app', () => {
-        throw new Error();
+        cy.get('#username-field-input')
+            .type(Cypress.env('admin_username'));
+        cy.get('#password-field-input')
+            .type(Cypress.env('admin_password'));
+        cy.get('#login-btn').click();
+        cy.get('#home-title')
+            .should('have.text', 'Welcome to VideoManager');
     });
 
     it('rejects invalid credentials', () => {
