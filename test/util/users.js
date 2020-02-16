@@ -1,4 +1,4 @@
-module.exports = {
+const users = {
     admin: {
         userName: 'admin@gmail.com',
         firstName: 'Admin',
@@ -19,4 +19,11 @@ module.exports = {
         firstName: 'Standard',
         lastName: 'User'
     }
+};
+
+const password = 'password';
+
+module.exports = {
+    users,
+    password
 };
