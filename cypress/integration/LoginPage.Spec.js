@@ -1,7 +1,5 @@
 import { HOST_URL } from '../util/envConstants';
 
-// TODO add validation that the login button stays disabled until valid input is entered.
-
 describe('Login Page', () => {
     beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
@@ -9,6 +7,8 @@ describe('Login Page', () => {
             .should('have.text', 'Login');
         cy.url()
             .should('include', '/login');
+        cy.get('#login-btn')
+            .should('be.disabled');
     });
 
     it('shows required validation warning for both input fields', () => {
@@ -25,6 +25,9 @@ describe('Login Page', () => {
             .click();
         cy.get('#password-field > span.text-danger')
             .should('have.text', 'Required');
+
+        cy.get('#login-btn')
+            .should('be.disabled');
     });
 
     it('shows email validation warning for username field', () => {
@@ -34,6 +37,9 @@ describe('Login Page', () => {
             .click();
         cy.get('#username-field > span.text-danger')
             .should('have.text', 'Must be valid email');
+
+        cy.get('#login-btn')
+            .should('be.disabled');
     });
 
     it('logs into app', () => {
@@ -41,6 +47,9 @@ describe('Login Page', () => {
             .type(Cypress.env('admin_username'));
         cy.get('#password-field-input')
             .type(Cypress.env('admin_password'));
+
+        cy.get('#login-btn')
+            .should('not.be.disabled');
         cy.get('#login-btn').click();
 
         cy.get('#home-title')
@@ -54,6 +63,9 @@ describe('Login Page', () => {
             .type('abc@gmail.com');
         cy.get('#password-field-input')
             .type('abc');
+
+        cy.get('#login-btn')
+            .should('not.be.disabled');
         cy.get('#login-btn').click();
 
         cy.get('#alert-box')
