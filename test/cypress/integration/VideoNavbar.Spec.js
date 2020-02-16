@@ -7,7 +7,8 @@ const testNavbar = ({
     settings = false,
     scan = false,
     filters = false,
-    profile = false
+    profile = false,
+    userName
 } = {}) => {
     cy.get('#home-link')
         .should('have.attr', 'href', '/')
@@ -51,6 +52,15 @@ const testNavbar = ({
     } else {
         settingsLink.should('not.exist');
     }
+
+    const profileToggle = cy.get('#vm-navbar-dropdown-toggle');
+    if (profile) {
+        profileToggle.should('have.attr', 'href', '#')
+            .should('have.attr', 'aria-expanded', 'false')
+            .should('have.text', userName);
+    } else {
+        profileToggle.should('not.exist');
+    }
 };
 
 describe('Navbar appearance and actions by user role', () => {
@@ -67,7 +77,8 @@ describe('Navbar appearance and actions by user role', () => {
             videos: true,
             users: true,
             settings: true,
-            profile: true
+            profile: true,
+            userName: `${admin.firstName} ${admin.lastName}`
         });
     });
 
@@ -78,7 +89,8 @@ describe('Navbar appearance and actions by user role', () => {
         testNavbar({
             videos: true,
             filters: true,
-            profile: true
+            profile: true,
+            userName: `${edit.firstName} ${edit.lastName}`
         });
     });
 
@@ -89,7 +101,8 @@ describe('Navbar appearance and actions by user role', () => {
         testNavbar({
             videos: true,
             scan: true,
-            profile: true
+            profile: true,
+            userName: `${scan.firstName} ${scan.lastName}`
         });
     });
 
@@ -99,7 +112,8 @@ describe('Navbar appearance and actions by user role', () => {
 
         testNavbar({
             videos: true,
-            profile: true
+            profile: true,
+            userName: `${standard.firstName} ${standard.lastName}`
         });
     });
 
@@ -113,7 +127,8 @@ describe('Navbar appearance and actions by user role', () => {
             filters: true,
             users: true,
             settings: true,
-            scan: true
+            scan: true,
+            userName: `${all.firstName} ${all.lastName}`
         });
     });
 
