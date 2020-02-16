@@ -1,4 +1,5 @@
 const { HOST_URL } = require('../../util/envConstants');
+const { users: { admin }, password } = require('../../util/users');
 
 describe('Login Page', () => {
     beforeEach(() => {
@@ -44,9 +45,9 @@ describe('Login Page', () => {
 
     it('logs into app', () => {
         cy.get('#username-field-input')
-            .type(Cypress.env('admin_username'));
+            .type(admin.userName);
         cy.get('#password-field-input')
-            .type(Cypress.env('admin_password'));
+            .type(password);
 
         cy.get('#login-btn')
             .should('not.be.disabled');
