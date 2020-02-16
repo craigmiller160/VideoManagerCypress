@@ -1,9 +1,10 @@
 const fs = require('fs');
-const { PG_CREATE_SCRIPT_PATH, PG_DROP_SCRIPT_PATH } = require('../util/envConstants');
+const { VM_SERVER_PATH } = require('../util/envConstants');
 
 const getDdlScripts = async (env) => {
-    const createScript = fs.readFileSync(env[PG_CREATE_SCRIPT_PATH], 'utf8');
-    const dropScript = fs.readFileSync(env[PG_DROP_SCRIPT_PATH], 'utf8');
+    const serverPath = env[VM_SERVER_PATH];
+    const createScript = fs.readFileSync(`${serverPath}/sql/create-schema.sql`, 'utf8');
+    const dropScript = fs.readFileSync(`${serverPath}/sql/drop-schema.sql`, 'utf8');
 
     return {
         createScript,
