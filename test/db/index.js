@@ -8,10 +8,10 @@ class PG {
     constructor() { }
 
     async init(env) {
-        const { createScript, dropScript } = await getDdlScripts(env);
+        const scripts = await getDdlScripts(env);
         this.client = getClient(env);
         await this.client.connect();
-        await createSchema(this.client, dropScript, createScript);
+        await createSchema(this.client, scripts);
     }
 }
 
