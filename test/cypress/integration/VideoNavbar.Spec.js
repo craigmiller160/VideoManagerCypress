@@ -58,6 +58,18 @@ const testNavbar = ({
         profileToggle.should('have.attr', 'href', '#')
             .should('have.attr', 'aria-expanded', 'false')
             .should('have.text', userName);
+
+        cy.get('#userProfileLink_navLink').should('not.be.visible');
+        cy.get('#logoutLink_text').should('not.be.visible');
+
+        cy.get('#vm-navbar-dropdown-toggle').click()
+            .should('have.attr', 'aria-expanded', 'true');
+
+        cy.get('#userProfileLink_navLink')
+            .should('have.attr', 'href', '/profile')
+            .should('have.text', 'Profile');
+        cy.get('#logoutLink_text')
+            .should('have.text', 'Logout');
     } else {
         profileToggle.should('not.exist');
     }
@@ -133,6 +145,14 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user can logout', () => {
-        throw new Error();
+        cy.visit(Cypress.env(HOST_URL));
+        cy.login(all.userName, password);
+
+        cy.get('#vm-navbar-dropdown-toggle')
+            .click();
+        cy.get('#logoutLink_text')
+            .click();
+        cy.get('#login-title')
+            .should('have.text', 'Login');
     });
 });
