@@ -10,7 +10,8 @@ class PG {
     async init(env) {
         const { createScript, dropScript } = await getDdlScripts(env);
         this.client = getClient(env);
-        createSchema(this.client, createScript, dropScript);
+        await this.client.connect();
+        await createSchema(this.client, dropScript, createScript);
     }
 }
 
