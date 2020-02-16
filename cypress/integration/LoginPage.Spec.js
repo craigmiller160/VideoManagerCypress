@@ -1,8 +1,9 @@
 import { HOST_URL } from '../util/envConstants';
-import '../db'; // TODO don't do this
+import getDdlScripts from '../db/getDdlScripts';
 
 describe('Login Page', () => {
     beforeEach(() => {
+        getDdlScripts(); // TODO delete this
         cy.visit(Cypress.env(HOST_URL));
         cy.get('#login-title')
             .should('have.text', 'Login');

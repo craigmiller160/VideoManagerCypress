@@ -8,7 +8,7 @@
     "start": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
-    "pg": "^7.18.1",
-    "cypress": "^4.0.2"
+    "cypress": "^4.0.2",
+    "pg": "^7.18.1"
   }
 }
