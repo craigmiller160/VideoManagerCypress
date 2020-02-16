@@ -12,17 +12,21 @@ const createSchema = async (client, scripts) => {
     const {
         dropScript,
         createScript,
-        rolesScript
+        rolesScript,
+        usersScript
     } = scripts;
     const dropPromises = dropScript.split('\n')
+        .filter((query) => query)
         .map(async (query) => await executeQuery(client, query));
     await Promise.all(dropPromises);
 
     const createPromises = createScript.split('\n')
+        .filter((query) => query)
         .map(async (query) => await executeQuery(client, query));
     await Promise.all(createPromises);
 
     await executeQuery(client, rolesScript);
+    await executeQuery(client, usersScript);
 };
 
 module.exports = createSchema;
