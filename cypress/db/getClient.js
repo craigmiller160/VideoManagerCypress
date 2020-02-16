@@ -1,12 +1,12 @@
 const { Client } = require('pg');
 const { PG_DB, PG_HOST, PG_PASSWORD, PG_PORT, PG_USERNAME } = require('../util/envConstants');
 
-const getClient = () => new Client({
-    user: Cypress.env(PG_USERNAME),
-    password: Cypress.env(PG_PASSWORD),
-    host: Cypress.env(PG_HOST),
-    database: Cypress.env(PG_DB),
-    port: Cypress.env(PG_PORT)
+const getClient = (env) => new Client({
+    user: env[PG_USERNAME],
+    password: env[PG_PASSWORD],
+    host: env[PG_HOST],
+    database: env[PG_DB],
+    port: env[PG_PORT]
 });
 
 module.exports = getClient;

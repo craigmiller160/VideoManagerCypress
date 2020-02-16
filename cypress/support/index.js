@@ -19,9 +19,9 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-before(async () => {
+before(() => {
     console.log('Before init'); // TODO delete this
-    await cy.task('initDb');
+    cy.task('initDb', { env: Cypress.env() });
     console.log('After init'); // TODO delete this
 });
 
