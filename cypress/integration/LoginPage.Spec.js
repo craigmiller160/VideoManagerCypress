@@ -1,4 +1,5 @@
 import { HOST_URL } from '../util/envConstants';
+import '../db'; // TODO don't do this
 
 describe('Login Page', () => {
     beforeEach(() => {
