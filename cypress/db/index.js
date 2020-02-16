@@ -12,4 +12,4 @@ class PG {
     }
 }
 
-export default new PG();
+module.exports = new PG();

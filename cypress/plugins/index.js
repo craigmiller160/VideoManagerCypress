@@ -24,7 +24,7 @@ module.exports = (on, config) => {
     on('task', {
         async initDb() {
             console.log('Starting init DB');
-            PG.init();
+            await PG.init();
             console.log('Ending init DB');
         }
     })
