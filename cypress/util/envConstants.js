@@ -6,3 +6,5 @@ export const PG_PASSWORD = 'pg_password';
 export const PG_DB = 'vm_qa';
 export const PG_DROP_SCRIPT_PATH = 'pg_drop_script_path';
 export const PG_CREATE_SCRIPT_PATH = 'pg_create_script_path';
+export const PG_HOST = "pg_host";
+export const PG_PORT = "pg_port";
