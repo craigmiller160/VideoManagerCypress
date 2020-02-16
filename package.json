@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Craig Miller <craigmiller160@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/cypress open"
+  },
   "devDependencies": {
     "cypress": "^4.0.2"
   }
