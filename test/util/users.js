@@ -18,6 +18,11 @@ const users = {
         userName: 'standard@gmail.com',
         firstName: 'Standard',
         lastName: 'User'
+    },
+    all: {
+        userName: 'all@gmail.com',
+        firstName: 'All Roles',
+        lastName: 'User'
     }
 };
 
