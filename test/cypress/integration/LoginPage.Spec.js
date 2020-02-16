@@ -1,4 +1,4 @@
-const { HOST_URL } = require('../util/envConstants');
+const { HOST_URL } = require('../../util/envConstants');
 
 describe('Login Page', () => {
     beforeEach(() => {
