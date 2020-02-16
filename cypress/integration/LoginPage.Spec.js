@@ -56,7 +56,9 @@ describe('Login Page', () => {
             .type('abc');
         cy.get('#login-btn').click();
 
-        // TODO need to add custom attributes to the element to detect the dynamic classes being added
-        throw new Error();
+        cy.get('#alert-box')
+            .invoke('attr', 'class')
+            .should('contain', 'danger')
+            .should('contain', 'show');
     });
 });
