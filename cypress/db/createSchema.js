@@ -1,5 +1,3 @@
-import fs from 'fs';
-
-export default (client) => {
+export default (client, dropScript, createScript) => {
 
 };
