@@ -4,7 +4,7 @@ const createVideos = () => {
     const cwd = process.cwd();
     const videoWorkingDir = `${cwd}/workingDir/videos`;
     if (!fs.existsSync(videoWorkingDir)) {
-        fs.mkdirSync(videoWorkingDir);
+        fs.mkdirSync(videoWorkingDir, { recursive: true });
     }
 
     const testVideoFile = `${cwd}/files/videos/test-video.mp4`;
