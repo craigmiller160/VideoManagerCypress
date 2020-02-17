@@ -1,1 +1,7 @@
-// TODO write this
+const { deleteVideos } = require('../../../file');
+
+const cleanFiles = () => {
+    deleteVideos();
+};
+
+module.exports = cleanFiles;

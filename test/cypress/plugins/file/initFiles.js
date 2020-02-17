@@ -1,4 +1,7 @@
+const { createVideos } = require('../../../file');
 
 const initFiles = () => {
-    console.log(process.cwd());
+    createVideos();
 };
+
+module.exports = initFiles;
