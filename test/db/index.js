@@ -2,19 +2,20 @@ const getDdlScripts = require('./getDdlScripts');
 const getClient = require('./getClient');
 const createSchema = require('./createSchema');
 
-class PG {
-    constructor() { }
+let client = null;
 
-    async init(env) {
-        const scripts = await getDdlScripts(env);
-        this.client = getClient(env);
-        await this.client.connect();
-        await createSchema(this.client, scripts);
-    }
+const init = async (env) => {
+    const scripts = await getDdlScripts(env);
+    this.client = getClient(env);
+    await client.connect();
+    await createSchema(client, scripts);
+};
 
-    close() {
-        this.client.close();
-    }
-}
+const close = () => {
+    client.close();
+};
 
-module.exports = new PG();
+module.exports = {
+    init,
+    close
+};
