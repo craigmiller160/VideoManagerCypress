@@ -1,4 +1,10 @@
+const { CLEAR_VIDEO_DATA } = require('../../db/queryKeys');
+
 describe('Scan Page', () => {
+    afterEach(() => {
+        cy.task('executeQuery', CLEAR_VIDEO_DATA);
+    });
+
     it('cannot scan without scan role', () => {
         throw new Error();
     });
