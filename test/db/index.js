@@ -4,27 +4,26 @@ const createSchema = require('./createSchema');
 const clearVideoData = require('./clearVideoData');
 const { CLEAR_VIDEO_DATA } = require('./queryKeys');
 
-let client = null;
 
-const init = async (env) => {
-    const scripts = await getDdlScripts(env);
-    this.client = getClient(env);
-    await client.connect();
-    await createSchema(client, scripts);
-};
+class PG {
+    constructor() { }
 
-const close = () => {
-    client.close();
-};
-
-const executeQuery = (key) => {
-    if (CLEAR_VIDEO_DATA === key) {
-        clearVideoData(client);
+    async init(env) {
+        const scripts = await getDdlScripts(env);
+        this.client = getClient(env);
+        await this.client.connect();
+        await createSchema(this.client, scripts);
     }
-};
 
-module.exports = {
-    init,
-    close,
-    executeQuery
-};
+    close() {
+        this.client.end();
+    }
+
+    async executeQuery(key) {
+        if (CLEAR_VIDEO_DATA === key) {
+            await clearVideoData(this.client);
+        }
+    }
+}
+
+module.exports = new PG();

@@ -18,7 +18,9 @@ const createVideos = () => {
 const deleteVideos = () => {
     const cwd = process.cwd();
     const videoWorkingDir = `${cwd}/workingDir/videos`;
-    fs.rmdirSync(videoWorkingDir, { recursive: true });
+    if (fs.existsSync(videoWorkingDir)) {
+        fs.rmdirSync(videoWorkingDir, { recursive: true });
+    }
 };
 
 module.exports = {
