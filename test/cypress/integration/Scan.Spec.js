@@ -9,8 +9,11 @@ describe('Scan Page', () => {
         throw new Error();
     });
 
+    it('cannot scan without root dir', () => {
+        throw new Error();
+    });
+
     it('runs scan and loads files', () => {
-        // TODO somehow need to add a new file here
         throw new Error();
     });
 });

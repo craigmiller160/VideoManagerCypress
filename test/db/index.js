@@ -2,7 +2,8 @@ const getDdlScripts = require('./getDdlScripts');
 const getClient = require('./getClient');
 const createSchema = require('./createSchema');
 const clearVideoData = require('./clearVideoData');
-const { CLEAR_VIDEO_DATA } = require('./queryKeys');
+const setRootDir = require('./setRootDir');
+const { CLEAR_VIDEO_DATA, SET_VIDEO_DIR } = require('./queryKeys');
 
 
 class PG {
@@ -19,9 +20,14 @@ class PG {
         this.client.end();
     }
 
-    async executeQuery(key) {
-        if (CLEAR_VIDEO_DATA === key) {
-            await clearVideoData(this.client);
+    executeQuery({ key, ...args }) {
+        switch (key) {
+            case CLEAR_VIDEO_DATA:
+                return clearVideoData(this.client);
+            case SET_VIDEO_DIR:
+                return setRootDir(this.client, args.rootDir);
+            default:
+                throw new Error(`Invalid query key: ${key}`);
         }
     }
 }
