@@ -1,5 +1,5 @@
-const initDb = require('./initDb');
-const closeDb = require('./closeDb');
+const initDb = require('./db/initDb');
+const closeDb = require('./db/closeDb');
 
 module.exports = (on, config) => {
     on('task', {

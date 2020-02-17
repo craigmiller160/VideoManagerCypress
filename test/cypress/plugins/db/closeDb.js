@@ -1,4 +1,4 @@
-const PG = require('../../db');
+const PG = require('../../../db');
 
 const closeDb = () => {
     PG.close();

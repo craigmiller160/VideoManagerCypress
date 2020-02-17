@@ -1,4 +1,4 @@
-const PG = require('../../db');
+const PG = require('../../../db');
 
 const initDb = async ({ env }) => {
     await PG.init(env);
