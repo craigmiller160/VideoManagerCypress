@@ -13,8 +13,7 @@ class PG {
     }
 
     close() {
-        // TODO figure out how to close it
-        // this.client.close();
+        this.client.close();
     }
 }
 
