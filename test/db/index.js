@@ -17,7 +17,7 @@ const close = () => {
     client.close();
 };
 
-const executeSql = (key) => {
+const executeQuery = (key) => {
     if (CLEAR_VIDEO_DATA === key) {
         clearVideoData(client);
     }
@@ -26,4 +26,5 @@ const executeSql = (key) => {
 module.exports = {
     init,
     close,
+    executeQuery
 };
