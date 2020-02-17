@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 
 const createVideos = () => {
     const cwd = process.cwd();
@@ -19,7 +19,7 @@ const deleteVideos = () => {
     const cwd = process.cwd();
     const videoWorkingDir = `${cwd}/workingDir/videos`;
     if (fs.existsSync(videoWorkingDir)) {
-        fs.rmdirSync(videoWorkingDir, { recursive: true });
+        fs.removeSync(videoWorkingDir);
     }
 };
 

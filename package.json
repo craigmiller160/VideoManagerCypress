@@ -8,7 +8,9 @@
     "start": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
+    "@types/fs-extra": "^8.0.1",
     "cypress": "^4.0.2",
+    "fs-extra": "^8.1.0",
     "pg": "^7.18.1",
     "pg-native": "^3.0.0"
   },
