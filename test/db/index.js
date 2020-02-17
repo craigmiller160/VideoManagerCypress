@@ -1,6 +1,8 @@
 const getDdlScripts = require('./getDdlScripts');
 const getClient = require('./getClient');
 const createSchema = require('./createSchema');
+const clearVideoData = require('./clearVideoData');
+const { CLEAR_VIDEO_DATA } = require('./queryKeys');
 
 let client = null;
 
@@ -15,7 +17,13 @@ const close = () => {
     client.close();
 };
 
+const executeSql = (key) => {
+    if (CLEAR_VIDEO_DATA === key) {
+        clearVideoData(client);
+    }
+};
+
 module.exports = {
     init,
-    close
+    close,
 };
