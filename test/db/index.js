@@ -27,7 +27,7 @@ class PG {
             case SET_VIDEO_DIR:
                 return setRootDir(this.client, args.rootDir);
             case CLEAR_VIDEO_DIR:
-                return clearRootDir(client);
+                return clearRootDir(this.client);
             default:
                 throw new Error(`Invalid query key: ${key}`);
         }
