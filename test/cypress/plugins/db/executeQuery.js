@@ -1,7 +1,7 @@
 const PG = require('../../../db');
 
-const executeQuery = async ({ key }) => {
-    await PG.executeQuery(key);
+const executeQuery = async ({ key, ...args }) => {
+    await PG.executeQuery(key, args);
     return null;
 };
 

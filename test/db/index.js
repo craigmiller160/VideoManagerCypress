@@ -20,7 +20,7 @@ class PG {
         this.client.end();
     }
 
-    executeQuery({ key, ...args }) {
+    executeQuery(key, args) {
         switch (key) {
             case CLEAR_VIDEO_DATA:
                 return clearVideoData(this.client);
