@@ -16,4 +16,8 @@ describe('Scan Page', () => {
     it('runs scan and loads files', () => {
         throw new Error();
     });
+
+    it('runs scan and removes files that are not present', () => {
+    	throw new Error();
+    });
 });
