@@ -1,10 +1,9 @@
 const getDdlScripts = require('./getDdlScripts');
 const getClient = require('./getClient');
 const createSchema = require('./createSchema');
-const clearVideoData = require('./clearVideoData');
 const setRootDir = require('./setRootDir');
-const clearRootDir = require('./clearRootDir');
-const { CLEAR_VIDEO_DATA, SET_VIDEO_DIR, CLEAR_VIDEO_DIR } = require('./queryKeys');
+const clearAllData = require('./clearAllData');
+const { CLEAR_ALL_DATA, SET_VIDEO_DIR } = require('./queryKeys');
 
 class PG {
     constructor() { }
@@ -22,12 +21,10 @@ class PG {
 
     executeQuery(key, args) {
         switch (key) {
-            case CLEAR_VIDEO_DATA:
-                return clearVideoData(this.client);
+            case CLEAR_ALL_DATA:
+                return clearAllData(this.client);
             case SET_VIDEO_DIR:
                 return setRootDir(this.client, args.rootDir);
-            case CLEAR_VIDEO_DIR:
-                return clearRootDir(this.client);
             default:
                 throw new Error(`Invalid query key: ${key}`);
         }
