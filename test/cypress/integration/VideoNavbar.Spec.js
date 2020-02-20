@@ -76,13 +76,15 @@ const testNavbar = ({
 };
 
 describe('Navbar appearance and actions by user role', () => {
-    it('is on login page', () => {
+    beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
+    });
+
+    it('is on login page', () => {
         testNavbar();
     });
 
     it('user has admin role', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(admin.userName, password);
 
         testNavbar({
@@ -95,7 +97,6 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user has edit role', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(edit.userName, password);
 
         testNavbar({
@@ -107,7 +108,6 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user has scan role', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(scan.userName, password);
 
         testNavbar({
@@ -119,7 +119,6 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user has no roles', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(standard.userName, password);
 
         testNavbar({
@@ -130,7 +129,6 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user has all roles', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(all.userName, password);
 
         testNavbar({
@@ -145,7 +143,6 @@ describe('Navbar appearance and actions by user role', () => {
     });
 
     it('user can logout', () => {
-        cy.visit(Cypress.env(HOST_URL));
         cy.login(all.userName, password);
 
         cy.get('#vm-navbar-dropdown-toggle')
