@@ -15,6 +15,14 @@ describe('Scan Page', () => {
         cy.login(standard.userName, password);
         cy.get('#scanDirectoryLink_text')
             .should('not.exist');
+        // cy.window()
+        //     .then((window) => {
+        //         window.location.href = `${Cypress.env(HOST_URL)}/scanning`;
+        //         cy.url()
+        //             .should('not.include', 'scanning')
+        //             .should('not.include', 'login');
+        //     });
+
         cy.visit(`${Cypress.env(HOST_URL)}/scanning`);
         cy.wait(1000);
         cy.url()
