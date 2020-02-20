@@ -17,6 +17,7 @@ describe('Scan Page', () => {
         cy.get('#scanDirectoryLink_text')
             .should('not.exist');
         cy.visit(`${Cypress.env(HOST_URL)}/scanning`);
+        cy.wait(1000);
         cy.url()
             .should('not.include', 'scanning')
             .should('not.include', 'login');
