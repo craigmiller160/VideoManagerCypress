@@ -3,7 +3,7 @@ const getClient = require('./getClient');
 const createSchema = require('./createSchema');
 const setRootDir = require('./setRootDir');
 const clearAllData = require('./clearAllData');
-const { CLEAR_ALL_DATA, SET_VIDEO_DIR } = require('./queryKeys');
+const { CLEAR_ALL_DATA, SET_ROOT_DIR } = require('./queryKeys');
 
 class PG {
     constructor() { }
@@ -23,7 +23,7 @@ class PG {
         switch (key) {
             case CLEAR_ALL_DATA:
                 return clearAllData(this.client);
-            case SET_VIDEO_DIR:
+            case SET_ROOT_DIR:
                 return setRootDir(this.client, args.rootDir);
             default:
                 throw new Error(`Invalid query key: ${key}`);

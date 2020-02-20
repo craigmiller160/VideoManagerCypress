@@ -23,7 +23,16 @@ describe('Scan Page', () => {
     });
 
     it('cannot scan without root dir', () => {
-        throw new Error();
+        cy.login(scan.userName, password);
+        cy.get('#scanDirectoryLink_text')
+            .should('exist')
+            .click();
+        cy.get('#alert-box')
+            .invoke('attr', 'class')
+            .should('contain', 'danger')
+            .should('contain', 'show');
+        cy.get('#alert-box')
+            .should('include.text', 'No root directory is set');
     });
 
     it('runs scan and loads files', () => {
