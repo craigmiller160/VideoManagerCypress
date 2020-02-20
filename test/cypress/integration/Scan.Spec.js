@@ -5,7 +5,6 @@ const { users: { standard, scan }, password } = require('../../util/users');
 describe('Scan Page', () => {
     beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
-        Cypress.Cookies.debug(true);
     });
 
     afterEach(() => {
