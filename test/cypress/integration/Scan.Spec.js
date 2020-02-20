@@ -5,6 +5,7 @@ const { users: { standard, scan }, password } = require('../../util/users');
 describe('Scan Page', () => {
     beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
+        Cypress.Cookies.debug(true);
     });
 
     afterEach(() => {
@@ -16,6 +17,9 @@ describe('Scan Page', () => {
         cy.get('#scanDirectoryLink_text')
             .should('not.exist');
         cy.visit(`${Cypress.env(HOST_URL)}/scanning`);
+        cy.url()
+            .should('not.include', 'scanning')
+            .should('not.include', 'login');
     });
 
     it('cannot scan without root dir', () => {
