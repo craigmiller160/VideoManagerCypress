@@ -1,13 +1,14 @@
 const fs = require('fs-extra');
+const { getWorkingDirVideos, getSampleFilesDirVideos } = require('./paths');
 
 const createVideos = () => {
-    const cwd = process.cwd();
-    const videoWorkingDir = `${cwd}/workingDir/videos`;
+    const videoWorkingDir = getWorkingDirVideos();
     if (!fs.existsSync(videoWorkingDir)) {
         fs.mkdirSync(videoWorkingDir, { recursive: true });
     }
 
-    const testVideoFile = `${cwd}/files/videos/test-video.mp4`;
+    const sampleVideosDir = getSampleFilesDirVideos();
+    const testVideoFile = `${sampleVideosDir}/test-video.mp4`;
     [...new Array(10).keys()]
         .forEach((index) => {
             const outputFile = `${videoWorkingDir}/test-video-${index}.mp4`;
@@ -16,8 +17,7 @@ const createVideos = () => {
 };
 
 const deleteVideos = () => {
-    const cwd = process.cwd();
-    const videoWorkingDir = `${cwd}/workingDir/videos`;
+    const videoWorkingDir = getWorkingDirVideos();
     if (fs.existsSync(videoWorkingDir)) {
         fs.removeSync(videoWorkingDir);
     }

@@ -26,7 +26,6 @@ describe('Scan Page', () => {
     it('cannot scan without root dir', () => {
         cy.login(scan.userName, password);
         cy.get('#scanDirectoryLink_text')
-            .should('exist')
             .click();
         cy.get('#alert-box')
             .invoke('attr', 'class')
@@ -37,7 +36,11 @@ describe('Scan Page', () => {
     });
 
     it('runs scan and loads files', () => {
-        throw new Error();
+        cy.login(scan.userName, password);
+        cy.get('#scanDirectoryLink_text')
+            .click();
+        cy.url()
+            .should('include.text', '/scanning');
     });
 
     it('runs scan and removes files that are not present', () => {
