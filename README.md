@@ -6,11 +6,9 @@ This project contains automated E2E tests for the VideoManager application.
 
 ## How to Run
 
-To run the Cypress Runner GUI, use:
-
-```
-yarn start
-```
+1. Start the VideoManagerServer application in QA mode: `mvn -P qa spring-boot:run`
+2. Start the VideoManagerClient application normally: `yarn start`
+3. Start the Cypress Runner GUI for this application: `yarn start`
 
 NOTE: You will need some OS environment configurations to make pg-native work.
 
