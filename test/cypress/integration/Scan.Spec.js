@@ -1,6 +1,7 @@
-const { CLEAR_ALL_DATA } = require('../../db/queryKeys');
+const { CLEAR_ALL_DATA, SET_ROOT_DIR } = require('../../db/queryKeys');
 const { HOST_URL } = require('../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../util/users');
+const { getSampleFilesDirVideos } = require('../../file/paths');
 
 describe('Scan Page', () => {
     beforeEach(() => {
@@ -36,6 +37,10 @@ describe('Scan Page', () => {
     });
 
     it('runs scan and loads files', () => {
+        cy.task('executeQuery', {
+            key: SET_ROOT_DIR,
+            rootDir: getSampleFilesDirVideos()
+        });
         cy.login(scan.userName, password);
         cy.get('#scanDirectoryLink_text')
             .click();
