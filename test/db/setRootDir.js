@@ -1,6 +1,7 @@
+const { getWorkingDirVideos } = require('../file/paths');
+
 const setRootDir = async (client, rootDir) => {
-    const cwd = process.cwd();
-    const defaultRootDir = `${cwd}/workingDir/videos`;
+    const defaultRootDir = getWorkingDirVideos();
     const dir = rootDir || defaultRootDir;
 
     await client.query('DELETE FROM settings');

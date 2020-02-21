@@ -38,10 +38,10 @@ describe('Scan Page', () => {
 
     it('runs scan and loads files', () => {
         cy.task('executeQuery', {
-            key: SET_ROOT_DIR,
-            rootDir: getSampleFilesDirVideos()
+            key: SET_ROOT_DIR
         });
         cy.login(scan.userName, password);
+        cy.pause(); // TODO delete this
         cy.get('#scanDirectoryLink_text')
             .click();
         cy.url()
