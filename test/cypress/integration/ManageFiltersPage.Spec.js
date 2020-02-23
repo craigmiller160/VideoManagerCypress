@@ -37,14 +37,16 @@ const toTitleCase = require('../../util/lib/toTitleCase');
 const CATEGORY_TYPE = 'category';
 const SERIES_TYPE = 'series';
 const STAR_TYPE = 'star';
+const ADD_ACTION = 'add';
+const EDIT_ACTION = 'edit';
+const DELETE_ACTION = 'delete';
 
 const useFilterModal = ({
-    isEdit = false,
+    action = '',
     type = '',
     value = ''
 } = {}) => {
     const typeTitleCase = toTitleCase(type);
-    const action = isEdit ? 'Edit' : 'Add';
     let modalSelector;
     let modalTitleSelector;
     switch (type) {
@@ -64,13 +66,28 @@ const useFilterModal = ({
             throw new Error(`Invalid type: ${type}`);
     }
 
+    let actionLabel;
+    switch (action) {
+        case ADD_ACTION:
+            actionLabel = 'Add';
+            break;
+        case EDIT_ACTION:
+            actionLabel = 'Edit';
+            break;
+        case DELETE_ACTION:
+            actionLabel = 'Delete';
+            break;
+        default:
+            throw new Error(`Invalid action: ${action}`);
+    }
+
     cy.get(modalSelector)
         .parent()
         .invoke('attr', 'class')
         .should('contain', 'show');
 
     cy.get(modalTitleSelector)
-        .should('have.text', `${action} ${typeTitleCase}`);
+        .should('have.text', `${actionLabel} ${typeTitleCase}`);
     cy.get(FILTER_NAME_LABEL)
         .should('have.text', `${typeTitleCase} Name`);
     cy.get(FILTER_NAME_INPUT)
@@ -146,7 +163,8 @@ describe('Manage Filters Page', () => {
 
             useFilterModal({
                 type: CATEGORY_TYPE,
-                value: newValue
+                value: newValue,
+                action: ADD_ACTION
             });
 
             cy.get(CATEGORY_FILTER_ITEMS)
