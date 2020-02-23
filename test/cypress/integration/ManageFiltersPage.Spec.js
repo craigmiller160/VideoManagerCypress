@@ -1,5 +1,24 @@
 const { HOST_URL } = require('../../util/envConstants');
 const { users: { standard, edit }, password } = require('../../util/users');
+const { MANAGE_FILTERS_LINK } = require('../selectors/navbar');
+const {
+    MANAGE_FILTERS_TITLE,
+    CATEGORY_FILTERS,
+    CATEGORY_FILTERS_TITLE,
+    CATEGORY_FILTERS_LIST,
+    CATEGORY_FILTERS_ADD_BTN,
+    SERIES_FILTERS,
+    SERIES_FILTERS_TITLE,
+    SERIES_FILTERS_LIST,
+    SERIES_FILTERS_ADD_BTN,
+    STAR_FILTERS,
+    STAR_FILTERS_TITLE,
+    STAR_FILTERS_LIST,
+    STAR_FILTERS_ADD_BTN,
+    CATEGORY_FILTER_ITEMS,
+    SERIES_FILTER_ITEMS,
+    STAR_FILTER_ITEMS
+} = require('../selectors/manageFilters');
 
 describe('Manage Filters Page', () => {
     beforeEach(() => {
@@ -8,57 +27,57 @@ describe('Manage Filters Page', () => {
 
     it('cannot access without edit role', () => {
         cy.login(standard.userName, password);
-        cy.get('#manageFiltersLink_navLink')
+        cy.get(MANAGE_FILTERS_LINK)
             .should('not.exist');
     });
 
     describe('has access', () => {
         beforeEach(() => {
             cy.login(edit.userName, password);
-            cy.get('#manageFiltersLink_navLink')
+            cy.get(MANAGE_FILTERS_LINK)
                 .click();
         });
 
         it('page has expected elements', () => {
-            cy.get('#manage-filters-title')
+            cy.get(MANAGE_FILTERS_TITLE)
                 .should('have.text', 'Manage Filters');
 
             // Categories
-            cy.get('#category-filters')
+            cy.get(CATEGORY_FILTERS)
                 .should('exist');
-            cy.get('#category-filters-title')
+            cy.get(CATEGORY_FILTERS_TITLE)
                 .should('have.text', 'Categories');
-            cy.get('#category-filters-list')
+            cy.get(CATEGORY_FILTERS_LIST)
                 .should('exist');
-            cy.get('#category-filters-add-btn')
+            cy.get(CATEGORY_FILTERS_ADD_BTN)
                 .should('have.text', '+');
 
             // Series
-            cy.get('#series-filters')
+            cy.get(SERIES_FILTERS)
                 .should('exist');
-            cy.get('#series-filters-title')
+            cy.get(SERIES_FILTERS_TITLE)
                 .should('have.text', 'Series');
-            cy.get('#series-filters-list')
+            cy.get(SERIES_FILTERS_LIST)
                 .should('exist');
-            cy.get('#series-filters-add-btn')
+            cy.get(SERIES_FILTERS_ADD_BTN)
                 .should('have.text', '+');
 
             // Stars
-            cy.get('#star-filters')
+            cy.get(STAR_FILTERS)
                 .should('exist');
-            cy.get('#star-filters-title')
+            cy.get(STAR_FILTERS_TITLE)
                 .should('have.text', 'Stars');
-            cy.get('#star-filters-list')
+            cy.get(STAR_FILTERS_LIST)
                 .should('exist');
-            cy.get('#star-filters-add-btn')
+            cy.get(STAR_FILTERS_ADD_BTN)
                 .should('have.text', '+');
         });
 
         it('add new category', () => {
             const newValue = 'New Value';
-            cy.get('#category-filters-list p')
+            cy.get(CATEGORY_FILTER_ITEMS)
                 .should('have.length', 0);
-            cy.get('#category-filters-add-btn')
+            cy.get(CATEGORY_FILTERS_ADD_BTN)
                 .click();
             cy.get('#category-filter-input-modal')
                 .parent()
@@ -79,9 +98,9 @@ describe('Manage Filters Page', () => {
             cy.get('#filter-save-btn')
                 .click();
 
-            cy.get('#category-filters-list p')
+            cy.get(CATEGORY_FILTER_ITEMS)
                 .should('have.length', 1);
-            cy.get('#category-filters-list p')
+            cy.get(CATEGORY_FILTER_ITEMS)
                 .should('have.text', newValue);
         });
 
