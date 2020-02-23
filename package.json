@@ -5,7 +5,8 @@
   "author": "Craig Miller <craigmiller160@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "./node_modules/.bin/cypress open"
+    "open": "./node_modules/.bin/cypress open",
+    "run:suite": "node scripts/run-suite.js"
   },
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
