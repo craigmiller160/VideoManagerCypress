@@ -32,12 +32,56 @@ const {
     STAR_FILTER_MODAL,
     STAR_FILTER_MODAL_TITLE
 } = require('../selectors/filterInputModal');
+const toTitleCase = require('../../util/lib/toTitleCase');
+
+const CATEGORY_TYPE = 'category';
+const SERIES_TYPE = 'series';
+const STAR_TYPE = 'star';
 
 const useFilterModal = ({
     isEdit = false,
-    type = ''
+    type = '',
+    value = ''
 } = {}) => {
+    const typeTitleCase = toTitleCase(type);
+    const action = isEdit ? 'Edit' : 'Add';
+    let modalSelector;
+    let modalTitleSelector;
+    switch (type) {
+        case CATEGORY_TYPE:
+            modalSelector = CATEGORY_FILTER_MODAL;
+            modalTitleSelector = CATEGORY_FILTER_MODAL_TITLE;
+            break;
+        case SERIES_TYPE:
+            modalSelector = SERIES_FILTER_MODAL;
+            modalTitleSelector = SERIES_FILTER_MODAL_TITLE;
+            break;
+        case STAR_TYPE:
+            modalSelector = STAR_FILTER_MODAL;
+            modalTitleSelector = STAR_FILTER_MODAL_TITLE;
+            break;
+        default:
+            throw new Error(`Invalid type: ${type}`);
+    }
 
+    cy.get(modalSelector)
+        .parent()
+        .invoke('attr', 'class')
+        .should('contain', 'show');
+
+    cy.get(modalTitleSelector)
+        .should('have.text', `${action} ${typeTitleCase}`);
+    cy.get(FILTER_NAME_LABEL)
+        .should('have.text', `${typeTitleCase} Name`);
+    cy.get(FILTER_NAME_INPUT)
+        .type(value);
+
+    cy.get(FILTER_CANCEL_BTN)
+        .should('exist');
+    cy.get(FILTER_DELETE_BTN)
+        .should('not.exist');
+    cy.get(FILTER_SAVE_BTN)
+        .click();
 };
 
 describe('Manage Filters Page', () => {
@@ -99,24 +143,11 @@ describe('Manage Filters Page', () => {
                 .should('have.length', 0);
             cy.get(CATEGORY_FILTERS_ADD_BTN)
                 .click();
-            cy.get(CATEGORY_FILTER_MODAL)
-                .parent()
-                .invoke('attr', 'class')
-                .should('contain', 'show');
 
-            cy.get(CATEGORY_FILTER_MODAL_TITLE)
-                .should('have.text', 'Add Category');
-            cy.get(FILTER_NAME_LABEL)
-                .should('have.text', 'Category Name');
-            cy.get(FILTER_NAME_INPUT)
-                .type(newValue);
-
-            cy.get(FILTER_CANCEL_BTN)
-                .should('exist');
-            cy.get(FILTER_DELETE_BTN)
-                .should('not.exist');
-            cy.get(FILTER_SAVE_BTN)
-                .click();
+            useFilterModal({
+                type: CATEGORY_TYPE,
+                value: newValue
+            });
 
             cy.get(CATEGORY_FILTER_ITEMS)
                 .should('have.length', 1);
