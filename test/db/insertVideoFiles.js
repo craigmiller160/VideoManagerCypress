@@ -1,10 +1,10 @@
 
 const INSERT_STMT = 'INSERT INTO video_files (description, display_name, file_name, file_added, last_modified, last_scan_timestamp, last_viewed, view_count, active) ' +
-    'VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)';
+    'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
 
-const insertVideoFiles = (client, { files }) => {
+const insertVideoFiles = async (client, { files }) => {
     console.log('Inserting video files');
-    files.forEach((file) => {
+    const promises = files.map(async (file) => {
         const args = [
             file.description || '',
             file.displayName || '',
@@ -16,8 +16,9 @@ const insertVideoFiles = (client, { files }) => {
             file.viewCount || 0,
             file.active || true
         ];
-        client.executeQuery(INSERT_STMT, args);
+        await client.query(INSERT_STMT, args);
     });
+    await Promise.all(promises);
 };
 
 module.exports = insertVideoFiles;

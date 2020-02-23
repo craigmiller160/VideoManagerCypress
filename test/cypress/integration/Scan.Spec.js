@@ -1,4 +1,4 @@
-const { CLEAR_ALL_DATA, SET_ROOT_DIR } = require('../../db/queryKeys');
+const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../db/queryKeys');
 const { HOST_URL } = require('../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../util/users');
 const { getSampleFilesDirVideos } = require('../../file/paths');
@@ -50,6 +50,28 @@ describe('Scan Page', () => {
     });
 
     it('runs scan and removes files that are not present', () => {
-    	throw new Error();
+        const fileName = 'dummy-file.mp4';
+    	cy.task('executeQuery', {
+    	    key: INSERT_VIDEO_FILES,
+            files: [
+                { fileName }
+            ]
+        });
+        cy.task('executeQuery', {
+            key: SET_ROOT_DIR
+        });
+    	cy.login(scan.userName, password);
+        cy.get('#scanDirectoryLink_text')
+            .click();
+        cy.wait(1000);
+        cy.get('#videoListLink_navLink')
+            .click();
+        cy.get('#video-list-contents-wrapper')
+            .should('exist');
+        cy.get('#video-list-contents .list-group-item')
+            .should('have.length', 10);
+        cy.get('#video-list-contents .list-group-item .list-group-item-heading')
+            .should('not.have.text', fileName);
+
     });
 });
