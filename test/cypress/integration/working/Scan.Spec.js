@@ -2,7 +2,7 @@ const { SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
 const { HOST_URL } = require('../../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../../util/users');
 const { ALERT_BOX } = require('../../selectors/alert');
-const { SCAN_DIR_LINK } = require('../../selectors/navbar');
+const { SCAN_DIR_LINK, VIDEO_LIST_LINK } = require('../../selectors/navbar');
 const {
     VIDEO_LIST_CONTENTS_WRAPPER,
     VIDEO_LIST_ITEM,
@@ -16,7 +16,7 @@ describe('Scan Page', () => {
 
     it('cannot scan without scan role', () => {
         cy.login(standard.userName, password);
-        cy.get('#scanDirectoryLink_text')
+        cy.get(SCAN_DIR_LINK)
             .should('not.exist');
         // Eventually figure out how to make a test for the URL endpoint work
         // cy.visit(`${Cypress.env(HOST_URL)}/scanning`);
