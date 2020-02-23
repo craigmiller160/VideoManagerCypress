@@ -5,11 +5,8 @@ const { getSampleFilesDirVideos } = require('../../file/paths');
 
 describe('Scan Page', () => {
     beforeEach(() => {
-        cy.visit(Cypress.env(HOST_URL));
-    });
-
-    afterEach(() => {
         cy.task('executeQuery', { key: CLEAR_ALL_DATA });
+        cy.visit(Cypress.env(HOST_URL));
     });
 
     it('cannot scan without scan role', () => {
@@ -41,11 +38,15 @@ describe('Scan Page', () => {
             key: SET_ROOT_DIR
         });
         cy.login(scan.userName, password);
-        cy.pause(); // TODO delete this
         cy.get('#scanDirectoryLink_text')
             .click();
-        cy.url()
-            .should('include.text', '/scanning');
+        cy.wait(1000);
+        cy.get('#videoListLink_navLink')
+            .click();
+        cy.get('#video-list-contents-wrapper')
+            .should('exist');
+        cy.get('#video-list-contents .list-group-item')
+            .should('have.length', 10);
     });
 
     it('runs scan and removes files that are not present', () => {
