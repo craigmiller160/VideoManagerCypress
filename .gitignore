@@ -4,4 +4,4 @@ node_modules
 *.iml
 yarn-error.log
 workingDir
-reports
+output
