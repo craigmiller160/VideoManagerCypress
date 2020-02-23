@@ -8,6 +8,7 @@ const {
     PASSWORD_FIELD,
     PASSWORD_FIELD_ERROR
 } = require('../../selectors/login');
+const { ALERT_BOX } = require('../../selectors/alert');
 
 describe('Login Page', () => {
     beforeEach(() => {
@@ -40,14 +41,14 @@ describe('Login Page', () => {
     });
 
     it('shows email validation warning for username field', () => {
-        cy.get('#username-field-input')
+        cy.get(USERNAME_FIELD)
             .type('abc');
         cy.get('body')
             .click();
-        cy.get('#username-field > span.text-danger')
+        cy.get(USERNAME_FIELD_ERROR)
             .should('have.text', 'Must be valid email');
 
-        cy.get('#login-btn')
+        cy.get(LOGIN_BTN)
             .should('be.disabled');
     });
 
@@ -58,8 +59,8 @@ describe('Login Page', () => {
             .type(password);
 
         cy.get(LOGIN_BTN)
-            .should('not.be.disabled');
-        cy.get(LOGIN_BTN).click();
+            .should('not.be.disabled')
+            .click();
 
         cy.get('#home-title')
             .should('have.text', 'Welcome to VideoManager');
@@ -68,16 +69,16 @@ describe('Login Page', () => {
     });
 
     it('rejects invalid credentials', () => {
-        cy.get('#username-field-input')
+        cy.get(USERNAME_FIELD)
             .type('abc@gmail.com');
-        cy.get('#password-field-input')
+        cy.get(PASSWORD_FIELD)
             .type('abc');
 
-        cy.get('#login-btn')
-            .should('not.be.disabled');
-        cy.get('#login-btn').click();
+        cy.get(LOGIN_BTN)
+            .should('not.be.disabled')
+            .click();
 
-        cy.get('#alert-box')
+        cy.get(ALERT_BOX)
             .invoke('attr', 'class')
             .should('contain', 'danger')
             .should('contain', 'show');
