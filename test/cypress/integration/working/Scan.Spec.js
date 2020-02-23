@@ -21,57 +21,60 @@ describe('Scan Page', () => {
         //     .should('not.include', 'login');
     });
 
-    it('cannot scan without root dir', () => {
-        cy.login(scan.userName, password);
-        cy.get('#scanDirectoryLink_text')
-            .click();
-        cy.get('#alert-box')
-            .invoke('attr', 'class')
-            .should('contain', 'danger')
-            .should('contain', 'show');
-        cy.get('#alert-box')
-            .should('include.text', 'No root directory is set');
-    });
-
-    it('runs scan and loads files', () => {
-        cy.task('executeQuery', {
-            key: SET_ROOT_DIR
+    describe('has access', () => {
+        beforeEach(() => {
+            cy.login(scan.userName, password);
         });
-        cy.login(scan.userName, password);
-        cy.get('#scanDirectoryLink_text')
-            .click();
-        cy.wait(1000);
-        cy.get('#videoListLink_navLink')
-            .click();
-        cy.get('#video-list-contents-wrapper')
-            .should('exist');
-        cy.get('#video-list-contents .list-group-item')
-            .should('have.length', 10);
-    });
 
-    it('runs scan and removes files that are not present', () => {
-        const fileName = 'dummy-file.mp4';
-    	cy.task('executeQuery', {
-    	    key: INSERT_VIDEO_FILES,
-            files: [
-                { fileName }
-            ]
+        it('cannot scan without root dir', () => {
+            cy.get('#scanDirectoryLink_text')
+                .click();
+            cy.get('#alert-box')
+                .invoke('attr', 'class')
+                .should('contain', 'danger')
+                .should('contain', 'show');
+            cy.get('#alert-box')
+                .should('include.text', 'No root directory is set');
         });
-        cy.task('executeQuery', {
-            key: SET_ROOT_DIR
-        });
-    	cy.login(scan.userName, password);
-        cy.get('#scanDirectoryLink_text')
-            .click();
-        cy.wait(1000);
-        cy.get('#videoListLink_navLink')
-            .click();
-        cy.get('#video-list-contents-wrapper')
-            .should('exist');
-        cy.get('#video-list-contents .list-group-item')
-            .should('have.length', 10);
-        cy.get('#video-list-contents .list-group-item .list-group-item-heading')
-            .should('not.have.text', fileName);
 
+        it('runs scan and loads files', () => {
+            cy.task('executeQuery', {
+                key: SET_ROOT_DIR
+            });
+            cy.get('#scanDirectoryLink_text')
+                .click();
+            cy.wait(1000);
+            cy.get('#videoListLink_navLink')
+                .click();
+            cy.get('#video-list-contents-wrapper')
+                .should('exist');
+            cy.get('#video-list-contents .list-group-item')
+                .should('have.length', 10);
+        });
+
+        it('runs scan and removes files that are not present', () => {
+            const fileName = 'dummy-file.mp4';
+            cy.task('executeQuery', {
+                key: INSERT_VIDEO_FILES,
+                files: [
+                    { fileName }
+                ]
+            });
+            cy.task('executeQuery', {
+                key: SET_ROOT_DIR
+            });
+            cy.get('#scanDirectoryLink_text')
+                .click();
+            cy.wait(1000);
+            cy.get('#videoListLink_navLink')
+                .click();
+            cy.get('#video-list-contents-wrapper')
+                .should('exist');
+            cy.get('#video-list-contents .list-group-item')
+                .should('have.length', 10);
+            cy.get('#video-list-contents .list-group-item .list-group-item-heading')
+                .should('not.have.text', fileName);
+
+        });
     });
 });
