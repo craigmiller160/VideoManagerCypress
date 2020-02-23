@@ -11,8 +11,15 @@
     "@types/fs-extra": "^8.0.1",
     "cypress": "^4.0.2",
     "fs-extra": "^8.1.0",
+    "ls": "^0.2.1",
+    "mocha": "^7.0.1",
+    "mochawesome": "^4.1.0",
+    "mochawesome-merge": "^4.0.1",
+    "mochawesome-report-generator": "^4.1.0",
     "pg": "^7.18.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "rimraf": "^3.0.2",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "@types/node": "^13.7.1"

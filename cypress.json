@@ -7,5 +7,13 @@
   "screenshotsFolder": "test/cypress/screenshots",
   "videosFolder": "test/cypress/videos",
   "supportFile": "test/cypress/support/index.js",
-  "baseUrl": "https://localhost:3000"
+  "baseUrl": "https://localhost:3000",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "reports",
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "timestamp": "yyyymmdd_HHMMss"
+  }
 }
