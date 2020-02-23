@@ -20,14 +20,19 @@ class PG {
         this.client.end();
     }
 
+    query(sql, params = []) {
+        console.log(sql, params);
+        return this.client.query(sql, params);
+    }
+
     executeQuery(key, args) {
         switch (key) {
             case CLEAR_ALL_DATA:
-                return clearAllData(this.client);
+                return clearAllData(this);
             case SET_ROOT_DIR:
-                return setRootDir(this.client, args.rootDir);
+                return setRootDir(this, args.rootDir);
             case INSERT_VIDEO_FILES:
-                return insertVideoFiles(this.client, args);
+                return insertVideoFiles(this, args);
             default:
                 throw new Error(`Invalid query key: ${key}`);
         }
