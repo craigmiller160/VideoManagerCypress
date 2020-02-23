@@ -2,11 +2,10 @@ const { SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
 const { HOST_URL } = require('../../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../../util/users');
 const { getSampleFilesDirVideos } = require('../../../file/paths');
-const { ALERT_BOX } = require('../../constants/alert');
+const { ALERT_BOX } = require('../../selectors/alert');
+const { SCAN_DIR_LINK } = require('../../selectors/navbar');
 
 // TODO move these to constants files
-const SCAN_DIR_LINK = '#scanDirectoryLink_text';
-const VIDEO_LIST_LINK = '#videoListLink_navLink';
 const VIDEO_LIST_CONTENTS_WRAPPER = '#video-list-contents-wrapper';
 const VIDEO_LIST_ITEM = '#video-list-contents .list-group-item';
 const VIDEO_LIST_ITEM_HEADING = '#video-list-contents .list-group-item .list-group-item-heading';
