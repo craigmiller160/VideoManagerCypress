@@ -9,6 +9,7 @@ const {
     PASSWORD_FIELD_ERROR
 } = require('../../selectors/login');
 const { ALERT_BOX } = require('../../selectors/alert');
+const { HOME_TITLE } = require('../../selectors/home');
 
 describe('Login Page', () => {
     beforeEach(() => {
@@ -62,7 +63,7 @@ describe('Login Page', () => {
             .should('not.be.disabled')
             .click();
 
-        cy.get('#home-title')
+        cy.get(HOME_TITLE)
             .should('have.text', 'Welcome to VideoManager');
         cy.url()
             .should('not.include', '/login');
