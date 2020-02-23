@@ -1,11 +1,10 @@
-const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
+const { SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
 const { HOST_URL } = require('../../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../../util/users');
 const { getSampleFilesDirVideos } = require('../../../file/paths');
 
 describe('Scan Page', () => {
     beforeEach(() => {
-        cy.task('executeQuery', { key: CLEAR_ALL_DATA });
         cy.visit(Cypress.env(HOST_URL));
     });
 
