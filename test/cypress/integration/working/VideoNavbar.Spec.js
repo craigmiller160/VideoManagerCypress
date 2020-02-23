@@ -1,5 +1,5 @@
-const { HOST_URL } = require('../../util/envConstants');
-const { users: { admin, edit, scan, standard, all }, password } = require('../../util/users');
+const { HOST_URL } = require('../../../util/envConstants');
+const { users: { admin, edit, scan, standard, all }, password } = require('../../../util/users');
 
 const testNavbar = ({
     videos = false,
