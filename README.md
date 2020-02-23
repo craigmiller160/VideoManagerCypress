@@ -4,28 +4,14 @@
 
 This project contains automated E2E tests for the VideoManager application.
 
+## Setup
+
+1. Setup environment for pg-native. This is a requirement for the test suite to connect to Postgres. <a href="./docs/pg-native.md">Instructions</a>.
+2. Install dependencies: `yarn`.
+
 ## How to Run
 
-1. Start the VideoManagerServer application in QA mode: `mvn -P qa spring-boot:run`
-2. Start the VideoManagerClient application normally: `yarn start`
-3. Start the Cypress Runner GUI for this application: `yarn start`
-
-NOTE: You will need some OS environment configurations to make pg-native work.
-
-## How to Get Pg-Native to Work
-
-pg-native is a NodeJS library for connecting to Postgres. To work, it requires Postgres to be directly installed on the OS. Not run through docker, but actually installed. Fortunately, this can be done while still relying on the docker-configured postgres for the actual application. Installing it locally only provides system utilities that pg-native requires.
-
-To set it up, first install these dependencies:
-
-```
-apt install build-essential postgresql-common
-apt install libpq-dev
-```
-
-Then make sure you turn off the newly installed postgres:
-
-```
-service postgresql stop
-systemctl disable postgresql
-```
+1. Start the VideoManagerServer application in QA mode: `mvn -P qa spring-boot:run`.
+2. Start the VideoManagerClient application normally: `yarn start`.
+3. FOR DEVELOPING TESTS: Open the test runner GUI with: `yarn open`.
+4. FOR RUNNING TEST SUITE: Execute the suite with: `yarn run:suite`.
