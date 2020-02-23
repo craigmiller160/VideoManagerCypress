@@ -21,8 +21,9 @@ const clearPastTests = () => {
 };
 
 const runCypress = async () => {
-    // TODO add a browser option to it
     const results = await cypress.run({
+        headless: true,
+        browser: 'chrome',
         spec: 'test/cypress/integration/working/**/*'
     });
 
