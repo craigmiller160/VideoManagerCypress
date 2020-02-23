@@ -4,8 +4,16 @@
   "fixturesFolder": "test/cypress/fixtures",
   "integrationFolder": "test/cypress/integration",
   "pluginsFile": "test/cypress/plugins/index.js",
-  "screenshotsFolder": "test/cypress/screenshots",
-  "videosFolder": "test/cypress/videos",
+  "screenshotsFolder": "output/screenshots",
+  "videosFolder": "output/videos",
   "supportFile": "test/cypress/support/index.js",
-  "baseUrl": "https://localhost:3000"
+  "baseUrl": "https://localhost:3000",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "output/reports",
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "timestamp": "yyyymmdd_HHMMss"
+  }
 }

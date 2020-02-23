@@ -1,7 +1,7 @@
-const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../db/queryKeys');
-const { HOST_URL } = require('../../util/envConstants');
-const { users: { standard, scan }, password } = require('../../util/users');
-const { getSampleFilesDirVideos } = require('../../file/paths');
+const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
+const { HOST_URL } = require('../../../util/envConstants');
+const { users: { standard, scan }, password } = require('../../../util/users');
+const { getSampleFilesDirVideos } = require('../../../file/paths');
 
 describe('Scan Page', () => {
     beforeEach(() => {
