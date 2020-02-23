@@ -1,7 +1,13 @@
+const {
+    USERNAME_FIELD,
+    PASSWORD_FIELD,
+    LOGIN_BTN
+} = require('../../selectors/login');
+
 Cypress.Commands.add('login', (userName, password) => {
-    cy.get('#username-field-input')
+    cy.get(USERNAME_FIELD)
         .type(userName);
-    cy.get('#password-field-input')
+    cy.get(PASSWORD_FIELD)
         .type(password);
-    cy.get('#login-btn').click();
+    cy.get(LOGIN_BTN).click();
 });
