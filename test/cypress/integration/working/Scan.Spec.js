@@ -2,6 +2,14 @@ const { SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
 const { HOST_URL } = require('../../../util/envConstants');
 const { users: { standard, scan }, password } = require('../../../util/users');
 const { getSampleFilesDirVideos } = require('../../../file/paths');
+const { ALERT_BOX } = require('../../constants/alert');
+
+// TODO move these to constants files
+const SCAN_DIR_LINK = '#scanDirectoryLink_text';
+const VIDEO_LIST_LINK = '#videoListLink_navLink';
+const VIDEO_LIST_CONTENTS_WRAPPER = '#video-list-contents-wrapper';
+const VIDEO_LIST_ITEM = '#video-list-contents .list-group-item';
+const VIDEO_LIST_ITEM_HEADING = '#video-list-contents .list-group-item .list-group-item-heading';
 
 describe('Scan Page', () => {
     beforeEach(() => {
@@ -26,13 +34,13 @@ describe('Scan Page', () => {
         });
 
         it('cannot scan without root dir', () => {
-            cy.get('#scanDirectoryLink_text')
+            cy.get(SCAN_DIR_LINK)
                 .click();
-            cy.get('#alert-box')
+            cy.get(ALERT_BOX)
                 .invoke('attr', 'class')
                 .should('contain', 'danger')
                 .should('contain', 'show');
-            cy.get('#alert-box')
+            cy.get(ALERT_BOX)
                 .should('include.text', 'No root directory is set');
         });
 
@@ -40,14 +48,14 @@ describe('Scan Page', () => {
             cy.task('executeQuery', {
                 key: SET_ROOT_DIR
             });
-            cy.get('#scanDirectoryLink_text')
+            cy.get(SCAN_DIR_LINK)
                 .click();
             cy.wait(1000);
-            cy.get('#videoListLink_navLink')
+            cy.get(VIDEO_LIST_LINK)
                 .click();
-            cy.get('#video-list-contents-wrapper')
+            cy.get(VIDEO_LIST_CONTENTS_WRAPPER)
                 .should('exist');
-            cy.get('#video-list-contents .list-group-item')
+            cy.get(VIDEO_LIST_ITEM)
                 .should('have.length', 10);
         });
 
@@ -62,16 +70,16 @@ describe('Scan Page', () => {
             cy.task('executeQuery', {
                 key: SET_ROOT_DIR
             });
-            cy.get('#scanDirectoryLink_text')
+            cy.get(SCAN_DIR_LINK)
                 .click();
             cy.wait(1000);
-            cy.get('#videoListLink_navLink')
+            cy.get(VIDEO_LIST_LINK)
                 .click();
-            cy.get('#video-list-contents-wrapper')
+            cy.get(VIDEO_LIST_CONTENTS_WRAPPER)
                 .should('exist');
-            cy.get('#video-list-contents .list-group-item')
+            cy.get(VIDEO_LIST_ITEM)
                 .should('have.length', 10);
-            cy.get('#video-list-contents .list-group-item .list-group-item-heading')
+            cy.get(VIDEO_LIST_ITEM_HEADING)
                 .should('not.have.text', fileName);
 
         });
