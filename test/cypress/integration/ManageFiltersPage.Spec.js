@@ -15,11 +15,11 @@ describe('Manage Filters Page', () => {
     describe('has access', () => {
         beforeEach(() => {
             cy.login(edit.userName, password);
+            cy.get('#manageFiltersLink_navLink')
+                .click();
         });
 
         it('page has expected elements', () => {
-            cy.get('#manageFiltersLink_navLink')
-                .click();
             cy.get('#manage-filters-title')
                 .should('have.text', 'Manage Filters');
 
@@ -55,7 +55,34 @@ describe('Manage Filters Page', () => {
         });
 
         it('add new category', () => {
-            throw new Error();
+            const newValue = 'New Value';
+            cy.get('#category-filters-list p')
+                .should('have.length', 0);
+            cy.get('#category-filters-add-btn')
+                .click();
+            cy.get('#category-filter-input-modal')
+                .parent()
+                .invoke('attr', 'class')
+                .should('contain', 'show');
+
+            cy.get('#category-filter-input-modal h5.modal-title')
+                .should('have.text', 'Add Category');
+            cy.get('label[for="filter-name-input"]')
+                .should('have.text', 'Category Name');
+            cy.get('#filter-name-input')
+                .type(newValue);
+
+            cy.get('#filter-cancel-btn')
+                .should('exist');
+            cy.get('#filter-delete-btn')
+                .should('not.exist');
+            cy.get('#filter-save-btn')
+                .click();
+
+            cy.get('#category-filters-list p')
+                .should('have.length', 1);
+            cy.get('#category-filters-list p')
+                .should('have.text', newValue);
         });
 
         it('edit existing category', () => {
