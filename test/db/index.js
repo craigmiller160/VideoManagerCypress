@@ -3,7 +3,8 @@ const getClient = require('./getClient');
 const createSchema = require('./createSchema');
 const setRootDir = require('./setRootDir');
 const clearAllData = require('./clearAllData');
-const { CLEAR_ALL_DATA, SET_ROOT_DIR } = require('./queryKeys');
+const insertVideoFiles = require('./insertVideoFiles');
+const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('./queryKeys');
 
 class PG {
     constructor() { }
@@ -25,6 +26,8 @@ class PG {
                 return clearAllData(this.client);
             case SET_ROOT_DIR:
                 return setRootDir(this.client, args.rootDir);
+            case INSERT_VIDEO_FILES:
+                return insertVideoFiles(this.client, args);
             default:
                 throw new Error(`Invalid query key: ${key}`);
         }
