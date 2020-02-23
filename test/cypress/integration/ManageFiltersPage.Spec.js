@@ -33,6 +33,13 @@ const {
     STAR_FILTER_MODAL_TITLE
 } = require('../selectors/filterInputModal');
 
+const useFilterModal = ({
+    isEdit = false,
+    type = ''
+} = {}) => {
+
+};
+
 describe('Manage Filters Page', () => {
     beforeEach(() => {
         cy.visit(Cypress.env(HOST_URL));
