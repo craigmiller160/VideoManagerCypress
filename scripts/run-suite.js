@@ -8,6 +8,7 @@ const cypressConfig = require('../cypress');
 
 const MA_REPORT_DIR = 'output/mochawesome-report';
 const MA_REPORT_NAME = 'vm-test-report.html';
+const TEST_SUITE = 'test/cypress/integration/working/**/*';
 
 const cwd = process.cwd();
 const { reporterOptions: { reportDir }, videosFolder, screenshotsFolder } = cypressConfig;
@@ -24,7 +25,7 @@ const runCypress = async () => {
     const results = await cypress.run({
         headless: true,
         browser: 'chrome',
-        spec: 'test/cypress/integration/working/**/*'
+        spec: TEST_SUITE
     });
 
     const report = await merge({
