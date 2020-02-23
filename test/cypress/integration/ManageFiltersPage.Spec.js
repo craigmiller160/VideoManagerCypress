@@ -17,8 +17,21 @@ const {
     STAR_FILTERS_ADD_BTN,
     CATEGORY_FILTER_ITEMS,
     SERIES_FILTER_ITEMS,
-    STAR_FILTER_ITEMS
+    STAR_FILTER_ITEMS,
+    CATEGORY_FILTER_MODAL,
+    CATEGORY_FILTER_MODAL_TITLE,
+    SERIES_FILTER_MODAL,
+    SERIES_FILTER_MODAL_TITLE,
+    STAR_FILTER_MODAL,
+    STAR_FILTER_MODAL_TITLE
 } = require('../selectors/manageFilters');
+const {
+    FILTER_NAME_LABEL,
+    FILTER_NAME_INPUT,
+    FILTER_CANCEL_BTN,
+    FILTER_DELETE_BTN,
+    FILTER_SAVE_BTN
+} = require('../selectors/filterInputModal');
 
 describe('Manage Filters Page', () => {
     beforeEach(() => {
@@ -79,23 +92,23 @@ describe('Manage Filters Page', () => {
                 .should('have.length', 0);
             cy.get(CATEGORY_FILTERS_ADD_BTN)
                 .click();
-            cy.get('#category-filter-input-modal')
+            cy.get(CATEGORY_FILTER_MODAL)
                 .parent()
                 .invoke('attr', 'class')
                 .should('contain', 'show');
 
-            cy.get('#category-filter-input-modal h5.modal-title')
+            cy.get(CATEGORY_FILTER_MODAL_TITLE)
                 .should('have.text', 'Add Category');
-            cy.get('label[for="filter-name-input"]')
+            cy.get(FILTER_NAME_LABEL)
                 .should('have.text', 'Category Name');
-            cy.get('#filter-name-input')
+            cy.get(FILTER_NAME_INPUT)
                 .type(newValue);
 
-            cy.get('#filter-cancel-btn')
+            cy.get(FILTER_CANCEL_BTN)
                 .should('exist');
-            cy.get('#filter-delete-btn')
+            cy.get(FILTER_DELETE_BTN)
                 .should('not.exist');
-            cy.get('#filter-save-btn')
+            cy.get(FILTER_SAVE_BTN)
                 .click();
 
             cy.get(CATEGORY_FILTER_ITEMS)
