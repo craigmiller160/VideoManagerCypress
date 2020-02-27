@@ -1,5 +1,17 @@
 const { HOST_URL } = require('../../../util/envConstants');
 const { users: { admin, edit, scan, standard, all }, password } = require('../../../util/users');
+const {
+    SCAN_DIR_LINK,
+    VIDEO_LIST_LINK,
+    HOME_LINK,
+    USER_MANAGEMENT_LINK,
+    MANAGE_FILTERS_LINK,
+    SETTINGS_LINK,
+    PROFILE_TOGGLE_BTN,
+    USER_PROFILE_LINK,
+    LOGOUT_LINK
+} = require('../../selectors/navbar');
+const { LOGIN_TITLE } = require('../../selectors/login');
 
 const testNavbar = ({
     videos = false,
@@ -10,11 +22,11 @@ const testNavbar = ({
     profile = false,
     userName
 } = {}) => {
-    cy.get('#home-link')
+    cy.get(HOME_LINK)
         .should('have.attr', 'href', '/')
         .should('have.text', 'Video Manager');
 
-    const videosLink = cy.get('#videoListLink_navLink');
+    const videosLink = cy.get(VIDEO_LIST_LINK);
     if (videos) {
         videosLink.should('have.attr', 'href', '/videos')
             .should('have.text', 'Videos');
@@ -22,7 +34,7 @@ const testNavbar = ({
         videosLink.should('not.exist');
     }
 
-    const usersLink = cy.get('#userManagementLink_navLink');
+    const usersLink = cy.get(USER_MANAGEMENT_LINK);
     if (users) {
         usersLink.should('have.attr', 'href', '/users')
             .should('have.text', 'Users');
@@ -30,7 +42,7 @@ const testNavbar = ({
         usersLink.should('not.exist');
     }
 
-    const filtersLink = cy.get('#manageFiltersLink_navLink');
+    const filtersLink = cy.get(MANAGE_FILTERS_LINK);
     if (filters) {
         filtersLink.should('have.attr', 'href', '/filters')
             .should('have.text', 'Filters');
@@ -38,14 +50,14 @@ const testNavbar = ({
         filtersLink.should('not.exist');
     }
 
-    const scanLink = cy.get('#scanDirectoryLink_text');
+    const scanLink = cy.get(SCAN_DIR_LINK);
     if (scan) {
         scanLink.should('have.text', 'Scan');
     } else {
         scanLink.should('not.exist');
     }
 
-    const settingsLink = cy.get('#settingsLink_navLink');
+    const settingsLink = cy.get(SETTINGS_LINK);
     if (settings) {
         settingsLink.should('have.attr', 'href', '/settings')
             .should('have.text', 'Settings');
@@ -53,22 +65,22 @@ const testNavbar = ({
         settingsLink.should('not.exist');
     }
 
-    const profileToggle = cy.get('#vm-navbar-dropdown-toggle');
+    const profileToggle = cy.get(PROFILE_TOGGLE_BTN);
     if (profile) {
         profileToggle.should('have.attr', 'href', '#')
             .should('have.attr', 'aria-expanded', 'false')
             .should('have.text', userName);
 
-        cy.get('#userProfileLink_navLink').should('not.be.visible');
-        cy.get('#logoutLink_text').should('not.be.visible');
+        cy.get(USER_PROFILE_LINK).should('not.be.visible');
+        cy.get(LOGOUT_LINK).should('not.be.visible');
 
-        cy.get('#vm-navbar-dropdown-toggle').click()
+        cy.get(PROFILE_TOGGLE_BTN).click()
             .should('have.attr', 'aria-expanded', 'true');
 
-        cy.get('#userProfileLink_navLink')
+        cy.get(USER_PROFILE_LINK)
             .should('have.attr', 'href', '/profile')
             .should('have.text', 'Profile');
-        cy.get('#logoutLink_text')
+        cy.get(LOGOUT_LINK)
             .should('have.text', 'Logout');
     } else {
         profileToggle.should('not.exist');
@@ -145,11 +157,11 @@ describe('Navbar appearance and actions by user role', () => {
     it('user can logout', () => {
         cy.login(all.userName, password);
 
-        cy.get('#vm-navbar-dropdown-toggle')
+        cy.get(PROFILE_TOGGLE_BTN)
             .click();
-        cy.get('#logoutLink_text')
+        cy.get(LOGOUT_LINK)
             .click();
-        cy.get('#login-title')
+        cy.get(LOGIN_TITLE)
             .should('have.text', 'Login');
     });
 });
