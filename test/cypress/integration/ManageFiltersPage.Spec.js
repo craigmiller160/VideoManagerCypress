@@ -235,10 +235,7 @@ describe('Manage Filters Page', () => {
                 action: ADD_ACTION
             });
 
-            cy.get(SERIES_FILTER_ITEMS)
-                .should('have.length', 1);
-            cy.get(SERIES_FILTER_ITEMS)
-                .should('have.text', newValue);
+            testItems(SERIES_FILTER_ITEMS, [newValue, startValue]);
         });
 
         it('edit existing series', () => {
@@ -275,10 +272,7 @@ describe('Manage Filters Page', () => {
                 action: ADD_ACTION
             });
 
-            cy.get(STAR_FILTER_ITEMS)
-                .should('have.length', 1);
-            cy.get(STAR_FILTER_ITEMS)
-                .should('have.text', newValue);
+            testItems(STAR_FILTER_ITEMS, [newValue, startValue]);
         });
 
         it('edit existing star', () => {
