@@ -75,10 +75,8 @@ const useFilterModal = ({
             actionLabel = 'Add';
             break;
         case EDIT_ACTION:
-            actionLabel = 'Edit';
-            break;
         case DELETE_ACTION:
-            actionLabel = 'Delete';
+            actionLabel = 'Edit';
             break;
         default:
             throw new Error(`Invalid action: ${action}`);
