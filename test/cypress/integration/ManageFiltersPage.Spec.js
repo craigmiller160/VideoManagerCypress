@@ -93,12 +93,16 @@ const useFilterModal = ({
         .should('have.text', `${actionLabel} ${typeTitleCase}`);
     cy.get(FILTER_NAME_LABEL)
         .should('have.text', `${typeTitleCase} Name`);
-    cy.get(FILTER_NAME_INPUT)
-        .clear()
-        .type(value);
+
+    if (action !== DELETE_ACTION) {
+        cy.get(FILTER_NAME_INPUT)
+            .clear()
+            .type(value);
+    }
 
     cy.get(FILTER_CANCEL_BTN)
         .should('exist');
+
     if (action === ADD_ACTION) {
         cy.get(FILTER_DELETE_BTN)
             .should('not.exist');
@@ -106,8 +110,14 @@ const useFilterModal = ({
         cy.get(FILTER_DELETE_BTN)
             .should('exist');
     }
-    cy.get(FILTER_SAVE_BTN)
-        .click();
+
+    if (action === DELETE_ACTION) {
+        cy.get(FILTER_DELETE_BTN)
+            .click();
+    } else {
+        cy.get(FILTER_SAVE_BTN)
+            .click();
+    }
 };
 
 const testItems = (selector, items) => {
@@ -203,8 +213,6 @@ describe('Manage Filters Page', () => {
 
         it('edit existing category', () => {
             const newValue = 'New Value';
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             cy.get(CATEGORY_FILTER_ITEMS)
                 .eq(0)
                 .click();
@@ -219,7 +227,16 @@ describe('Manage Filters Page', () => {
         });
 
         it('delete category', () => {
-            throw new Error();
+            cy.get(CATEGORY_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: CATEGORY_TYPE,
+                action: DELETE_ACTION
+            });
+
+            testItems(CATEGORY_FILTER_ITEMS, []);
         });
 
         it('add new series', () => {
@@ -256,7 +273,16 @@ describe('Manage Filters Page', () => {
         });
 
         it('delete series', () => {
-            throw new Error();
+            cy.get(SERIES_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: SERIES_TYPE,
+                action: DELETE_ACTION
+            });
+
+            testItems(SERIES_FILTER_ITEMS, []);
         });
 
         it('add new star', () => {
@@ -293,7 +319,16 @@ describe('Manage Filters Page', () => {
         });
 
         it('delete star', () => {
-            throw new Error();
+            cy.get(STAR_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: STAR_TYPE,
+                action: DELETE_ACTION
+            });
+
+            testItems(STAR_FILTER_ITEMS, []);
         });
     });
 });
