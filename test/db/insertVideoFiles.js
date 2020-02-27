@@ -34,7 +34,7 @@ const insertVideoFiles = async (client, { files, categories, series, stars }) =>
     }
 
     if (stars) {
-        starPromises = series.map((star) => {
+        starPromises = stars.map((star) => {
             const args = [
                 star.starName || ''
             ];
