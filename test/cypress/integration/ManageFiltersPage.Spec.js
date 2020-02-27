@@ -33,6 +33,7 @@ const {
     STAR_FILTER_MODAL_TITLE
 } = require('../selectors/filterInputModal');
 const toTitleCase = require('../../util/lib/toTitleCase');
+const { INSERT_VIDEO_FILES } = require('../../db/queryKeys');
 
 const CATEGORY_TYPE = 'category';
 const SERIES_TYPE = 'series';
@@ -174,6 +175,14 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing category', () => {
+            const startValue = 'Start Value';
+            const newValue = 'New Value';
+            cy.task('executeQuery', {
+                key: INSERT_VIDEO_FILES,
+                categories: [
+                    { categoryName: startValue }
+                ]
+            });
             throw new Error();
         });
 
@@ -182,7 +191,22 @@ describe('Manage Filters Page', () => {
         });
 
         it('add new series', () => {
-            throw new Error();
+            const newValue = 'New Value';
+            cy.get(SERIES_FILTER_ITEMS)
+                .should('have.length', 0);
+            cy.get(SERIES_FILTERS_ADD_BTN)
+                .click();
+
+            useFilterModal({
+                type: SERIES_TYPE,
+                value: newValue,
+                action: ADD_ACTION
+            });
+
+            cy.get(SERIES_FILTER_ITEMS)
+                .should('have.length', 1);
+            cy.get(SERIES_FILTER_ITEMS)
+                .should('have.text', newValue);
         });
 
         it('edit existing series', () => {
@@ -194,7 +218,22 @@ describe('Manage Filters Page', () => {
         });
 
         it('add new star', () => {
-            throw new Error();
+            const newValue = 'New Value';
+            cy.get(STAR_FILTER_ITEMS)
+                .should('have.length', 0);
+            cy.get(STAR_FILTERS_ADD_BTN)
+                .click();
+
+            useFilterModal({
+                type: STAR_TYPE,
+                value: newValue,
+                action: ADD_ACTION
+            });
+
+            cy.get(STAR_FILTER_ITEMS)
+                .should('have.length', 1);
+            cy.get(STAR_FILTER_ITEMS)
+                .should('have.text', newValue);
         });
 
         it('edit existing star', () => {
