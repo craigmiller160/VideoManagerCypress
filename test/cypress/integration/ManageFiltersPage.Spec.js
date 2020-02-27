@@ -42,6 +42,8 @@ const ADD_ACTION = 'add';
 const EDIT_ACTION = 'edit';
 const DELETE_ACTION = 'delete';
 
+const startValue = 'Start Value';
+
 const useFilterModal = ({
     action = '',
     type = '',
@@ -92,14 +94,30 @@ const useFilterModal = ({
     cy.get(FILTER_NAME_LABEL)
         .should('have.text', `${typeTitleCase} Name`);
     cy.get(FILTER_NAME_INPUT)
+        .clear()
         .type(value);
 
     cy.get(FILTER_CANCEL_BTN)
         .should('exist');
-    cy.get(FILTER_DELETE_BTN)
-        .should('not.exist');
+    if (action === ADD_ACTION) {
+        cy.get(FILTER_DELETE_BTN)
+            .should('not.exist');
+    } else {
+        cy.get(FILTER_DELETE_BTN)
+            .should('exist');
+    }
     cy.get(FILTER_SAVE_BTN)
         .click();
+};
+
+const testItems = (selector, items) => {
+    cy.get(selector)
+        .should('have.length', items.length);
+    items.forEach((item, index) => {
+        cy.get(selector)
+            .eq(index)
+            .should('have.text', item);
+    });
 };
 
 describe('Manage Filters Page', () => {
@@ -115,6 +133,12 @@ describe('Manage Filters Page', () => {
 
     describe('has access', () => {
         beforeEach(() => {
+            cy.task('executeQuery', {
+                key: INSERT_VIDEO_FILES,
+                categories: [
+                    { categoryName: startValue }
+                ]
+            });
             cy.login(edit.userName, password);
             cy.get(MANAGE_FILTERS_LINK)
                 .click();
@@ -158,7 +182,7 @@ describe('Manage Filters Page', () => {
         it('add new category', () => {
             const newValue = 'New Value';
             cy.get(CATEGORY_FILTER_ITEMS)
-                .should('have.length', 0);
+                .should('have.length', 1);
             cy.get(CATEGORY_FILTERS_ADD_BTN)
                 .click();
 
@@ -168,29 +192,36 @@ describe('Manage Filters Page', () => {
                 action: ADD_ACTION
             });
 
-            cy.get(CATEGORY_FILTER_ITEMS)
-                .should('have.length', 1);
-            cy.get(CATEGORY_FILTER_ITEMS)
-                .should('have.text', newValue);
+            testItems(CATEGORY_FILTER_ITEMS, [newValue, startValue]);
         });
 
         it('edit existing category', () => {
             const startValue = 'Start Value';
             const newValue = 'New Value';
-            cy.task('executeQuery', {
-                key: INSERT_VIDEO_FILES,
-                categories: [
-                    { categoryName: startValue }
-                ]
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
+            cy.get(CATEGORY_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: CATEGORY_TYPE,
+                value: newValue,
+                action: EDIT_ACTION
             });
-            throw new Error();
+
+            testItems(CATEGORY_FILTER_ITEMS, [newValue]);
         });
 
         it('delete category', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             throw new Error();
         });
 
         it('add new series', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             const newValue = 'New Value';
             cy.get(SERIES_FILTER_ITEMS)
                 .should('have.length', 0);
@@ -210,14 +241,20 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing series', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             throw new Error();
         });
 
         it('delete series', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             throw new Error();
         });
 
         it('add new star', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             const newValue = 'New Value';
             cy.get(STAR_FILTER_ITEMS)
                 .should('have.length', 0);
@@ -237,10 +274,14 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing star', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             throw new Error();
         });
 
         it('delete star', () => {
+            cy.get(MANAGE_FILTERS_LINK)
+                .click();
             throw new Error();
         });
     });
