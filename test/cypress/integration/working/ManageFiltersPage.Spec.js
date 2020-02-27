@@ -1,6 +1,6 @@
-const { HOST_URL } = require('../../util/envConstants');
-const { users: { standard, edit }, password } = require('../../util/users');
-const { MANAGE_FILTERS_LINK } = require('../selectors/navbar');
+const { HOST_URL } = require('../../../util/envConstants');
+const { users: { standard, edit }, password } = require('../../../util/users');
+const { MANAGE_FILTERS_LINK } = require('../../selectors/navbar');
 const {
     MANAGE_FILTERS_TITLE,
     CATEGORY_FILTERS,
@@ -18,7 +18,7 @@ const {
     CATEGORY_FILTER_ITEMS,
     SERIES_FILTER_ITEMS,
     STAR_FILTER_ITEMS
-} = require('../selectors/manageFilters');
+} = require('../../selectors/manageFilters');
 const {
     FILTER_NAME_LABEL,
     FILTER_NAME_INPUT,
@@ -31,9 +31,9 @@ const {
     SERIES_FILTER_MODAL_TITLE,
     STAR_FILTER_MODAL,
     STAR_FILTER_MODAL_TITLE
-} = require('../selectors/filterInputModal');
-const toTitleCase = require('../../util/lib/toTitleCase');
-const { INSERT_VIDEO_FILES } = require('../../db/queryKeys');
+} = require('../../selectors/filterInputModal');
+const toTitleCase = require('../../../util/lib/toTitleCase');
+const { INSERT_VIDEO_FILES } = require('../../../db/queryKeys');
 
 const CATEGORY_TYPE = 'category';
 const SERIES_TYPE = 'series';
