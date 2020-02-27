@@ -137,6 +137,12 @@ describe('Manage Filters Page', () => {
                 key: INSERT_VIDEO_FILES,
                 categories: [
                     { categoryName: startValue }
+                ],
+                series: [
+                    { seriesName: startValue }
+                ],
+                stars: [
+                    { starName: startValue }
                 ]
             });
             cy.login(edit.userName, password);
@@ -196,7 +202,6 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing category', () => {
-            const startValue = 'Start Value';
             const newValue = 'New Value';
             cy.get(MANAGE_FILTERS_LINK)
                 .click();
@@ -214,14 +219,10 @@ describe('Manage Filters Page', () => {
         });
 
         it('delete category', () => {
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             throw new Error();
         });
 
         it('add new series', () => {
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             const newValue = 'New Value';
             cy.get(SERIES_FILTER_ITEMS)
                 .should('have.length', 0);
@@ -241,20 +242,27 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing series', () => {
+            const newValue = 'New Value';
             cy.get(MANAGE_FILTERS_LINK)
                 .click();
-            throw new Error();
+            cy.get(SERIES_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: SERIES_TYPE,
+                value: newValue,
+                action: EDIT_ACTION
+            });
+
+            testItems(SERIES_FILTER_ITEMS, [newValue]);
         });
 
         it('delete series', () => {
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             throw new Error();
         });
 
         it('add new star', () => {
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             const newValue = 'New Value';
             cy.get(STAR_FILTER_ITEMS)
                 .should('have.length', 0);
@@ -274,14 +282,23 @@ describe('Manage Filters Page', () => {
         });
 
         it('edit existing star', () => {
+            const newValue = 'New Value';
             cy.get(MANAGE_FILTERS_LINK)
                 .click();
-            throw new Error();
+            cy.get(STAR_FILTER_ITEMS)
+                .eq(0)
+                .click();
+
+            useFilterModal({
+                type: STAR_TYPE,
+                value: newValue,
+                action: EDIT_ACTION
+            });
+
+            testItems(STAR_FILTER_ITEMS, [newValue]);
         });
 
         it('delete star', () => {
-            cy.get(MANAGE_FILTERS_LINK)
-                .click();
             throw new Error();
         });
     });
