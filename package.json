@@ -19,7 +19,8 @@
     "mochawesome-report-generator": "^4.1.0",
     "opn": "^6.0.0",
     "pg": "^7.18.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "shell-env": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^13.7.1"
