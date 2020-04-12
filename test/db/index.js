@@ -5,11 +5,13 @@ const setRootDir = require('./setRootDir');
 const clearAllData = require('./clearAllData');
 const insertVideoFiles = require('./insertVideoFiles');
 const { CLEAR_ALL_DATA, SET_ROOT_DIR, INSERT_VIDEO_FILES } = require('./queryKeys');
+const { cloudConfig } = require('../config');
 
 class PG {
     constructor() { }
 
     async init(env) {
+        // TODO integrate config into this
         const scripts = await getDdlScripts(env);
         this.client = getClient(env);
         await this.client.connect();

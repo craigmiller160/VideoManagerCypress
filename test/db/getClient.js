@@ -1,12 +1,13 @@
 const { Client } = require('pg');
-const { PG_DB, PG_HOST, PG_PASSWORD, PG_PORT, PG_USERNAME } = require('../util/envConstants');
+const { PG_DB } = require('../util/envConstants');
+const { POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASS } = require('../config');
 
-const getClient = (env) => new Client({
-    user: env[PG_USERNAME],
-    password: env[PG_PASSWORD],
-    host: env[PG_HOST],
+const getClient = (env, config) => new Client({
+    user: config[POSTGRES_USER],
+    password: config[POSTGRES_PASS],
+    host: config[POSTGRES_HOST],
     database: env[PG_DB],
-    port: env[PG_PORT]
+    port: config[POSTGRES_PORT]
 });
 
 module.exports = getClient;

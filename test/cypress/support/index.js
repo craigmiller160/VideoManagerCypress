@@ -2,6 +2,7 @@ require('./commands');
 const { CLEAR_ALL_DATA } = require('../../db/queryKeys');
 
 before(() => {
+    cy.task('initConfig', { env: Cypress.env() });
     cy.task('initDb', { env: Cypress.env() });
     cy.task('initFiles');
 });
