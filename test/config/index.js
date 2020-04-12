@@ -17,8 +17,11 @@ class CloudConfig {
 
     async init(env) {
         if (this.config[CONFIG_LOADED]) {
+            console.log('Config already loaded, skipping');
             return;
         }
+
+        console.log('Loading cloud config values');
 
         const { CONFIG_SERVER_USER, CONFIG_SERVER_PASSWORD } = shellEnv.sync();
         const config = await cloudConfigClient.load({
