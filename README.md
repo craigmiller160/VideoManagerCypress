@@ -8,6 +8,12 @@ This project contains automated E2E tests for the VideoManager application.
 
 1. Setup environment for pg-native. This is a requirement for the test suite to connect to Postgres. <a href="./docs/pg-native.md">Instructions</a>.
 2. Install dependencies: `yarn`.
+3. Make sure that the local config server is running.
+4. These environment variables must be set on the machine:
+```
+CONFIG_SERVER_USER
+CONFIG_SERVER_PASSWORD
+```
 
 ## How to Run
 

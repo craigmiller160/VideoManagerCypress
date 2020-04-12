@@ -3,7 +3,7 @@ const closeDb = require('./db/closeDb');
 const executeQuery = require('./db/executeQuery');
 const initFiles = require('./file/initFiles');
 const cleanFiles = require('./file/cleanFiles');
-const PG = require('../../db');
+const initConfig = require('./config/initConfig');
 
 module.exports = (on, config) => {
     on('task', {
@@ -11,6 +11,7 @@ module.exports = (on, config) => {
         closeDb,
         executeQuery,
         initFiles,
-        cleanFiles
+        cleanFiles,
+        initConfig
     });
 };
