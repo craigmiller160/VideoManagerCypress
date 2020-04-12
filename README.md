@@ -15,3 +15,9 @@ This project contains automated E2E tests for the VideoManager application.
 2. Start the VideoManagerClient application normally: `yarn start`.
 3. FOR DEVELOPING TESTS: Open the test runner GUI with: `yarn open`.
 4. FOR RUNNING TEST SUITE: Execute the suite with: `yarn run:suite`.
+
+TODO add requirement for cloud config server and new env variables
+
+CONFIG_SERVER_USER
+
+CONFIG_SERVER_PASSWORD
