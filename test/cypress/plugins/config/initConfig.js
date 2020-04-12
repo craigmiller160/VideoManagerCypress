@@ -1,4 +1,4 @@
-const { cloudConfig } = require('../config');
+const { cloudConfig } = require('../../../config');
 
 const initConfig = async ({ env }) => {
     await cloudConfig.init(env);
