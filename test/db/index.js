@@ -11,9 +11,9 @@ class PG {
     constructor() { }
 
     async init(env) {
-        // TODO integrate config into this
+        const config = cloudConfig.config;
         const scripts = await getDdlScripts(env);
-        this.client = getClient(env);
+        this.client = getClient(env, config);
         await this.client.connect();
         await createSchema(this.client, scripts);
     }
