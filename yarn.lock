@@ -277,6 +277,11 @@ cliui@^5.0.0:
     strip-ansi "^5.2.0"
     wrap-ansi "^5.1.0"
 
+cloud-config-client@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/cloud-config-client/-/cloud-config-client-1.5.0.tgz#bc7c656bdf3a68563af6a2ef5831e2e4e3fa37c8"
+  integrity sha512-1rE5DMbR9v7q/Wut/yHVWbprAe2j5p2zzdknBPpAvPaN9twzAm8dH4zJBb4QLDwPrQjUOlQ0Lucxp/tyrUS5rw==
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
